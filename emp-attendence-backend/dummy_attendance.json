@@ -1,0 +1,92 @@
+[
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-13T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-13T03:30:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-13T12:30:00.000Z" },
+    "status": "present",
+    "totalHours": 9,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-12T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-12T03:35:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-12T12:35:00.000Z" },
+    "status": "present",
+    "totalHours": 9,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-11T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-11T04:45:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-11T12:45:00.000Z" },
+    "status": "late",
+    "totalHours": 8,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-10T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-10T03:25:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-10T12:30:00.000Z" },
+    "status": "present",
+    "totalHours": 9.08,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-09T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-09T03:30:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-09T12:30:00.000Z" },
+    "status": "present",
+    "totalHours": 9,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-06T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-06T03:30:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-06T07:30:00.000Z" },
+    "status": "half-day",
+    "totalHours": 4,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-05T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-05T03:28:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-05T12:32:00.000Z" },
+    "status": "present",
+    "totalHours": 9.06,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-04T00:00:00.000Z" },
+    "checkInTime": null,
+    "checkOutTime": null,
+    "status": "absent",
+    "totalHours": 0,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-03T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-03T03:30:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-03T12:40:00.000Z" },
+    "status": "present",
+    "totalHours": 9.16,
+    "__v": 0
+  },
+  {
+    "userId": { "$oid": "69932d370999430319fdf456" },
+    "date": { "$date": "2026-02-02T00:00:00.000Z" },
+    "checkInTime": { "$date": "2026-02-02T05:00:00.000Z" },
+    "checkOutTime": { "$date": "2026-02-02T13:00:00.000Z" },
+    "status": "late",
+    "totalHours": 8,
+    "__v": 0
+  }
+]

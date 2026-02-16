@@ -1,5 +1,6 @@
 
 const Attendance = require('../models/Attendance');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const { getStartOfDay, getEndOfDay, getMonthRange } = require('../utils/dateHelpers');
 const { generateCSV } = require('../utils/csvExporter');
@@ -105,29 +106,43 @@ exports.getMyHistory = async (req, res) => {
 
 exports.getMySummary = async (req, res) => {
   try {
+    const userId = req.user.id;
+    
     const now = new Date();
-    const { start, end } = getMonthRange(now.getFullYear(), now.getMonth());
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
 
-    const records = await Attendance.find({
-      userId: req.user.id,
-      date: { $gte: start, $lte: end }
-    });
+    const stats = await Attendance.aggregate([
+      { 
+        $match: { 
+          userId: new mongoose.Types.ObjectId(userId), 
+          date: { $gte: startOfMonth, $lte: endOfMonth } 
+        } 
+      },
+      {
+        $group: {
+          _id: null,
+          present: { $sum: { $cond: [{ $eq: ["$status", "present"] }, 1, 0] } },
+          late: { $sum: { $cond: [{ $eq: ["$status", "late"] }, 1, 0] } },
+          halfDay: { $sum: { $cond: [{ $eq: ["$status", "half-day"] }, 1, 0] } },
+          absent: { $sum: { $cond: [{ $eq: ["$status", "absent"] }, 1, 0] } },
+          totalHours: { $sum: "$totalHours" }
+        }
+      }
+    ]);
 
-    const summary = {
-      present: records.filter(r => r.status === 'present').length,
-      late: records.filter(r => r.status === 'late').length,
-      halfDay: records.filter(r => r.status === 'half-day').length,
-      absent: 0, 
-      totalHours: records.reduce((acc, curr) => acc + curr.totalHours, 0).toFixed(2)
+    const result = stats[0] || {
+      totalPresent: 0,
+      totalLate: 0,
+      totalHalfDay: 0,
+      totalAbsent: 0,
+      totalHours: 0
     };
 
-   
-    const daysPassed = now.getDate(); 
-    const daysAttended = records.length;
-    summary.absent = Math.max(0, daysPassed - daysAttended);
+    res.json(result);
 
-    res.status(200).json(summary);
   } catch (error) {
+    console.error("Summary Error:", error);
     res.status(500).json({ message: 'Server error fetching summary' });
   }
 };
@@ -137,22 +152,30 @@ exports.getMySummary = async (req, res) => {
 
 exports.getAllAttendance = async (req, res) => {
   try {
+    const { employeeId, date, status } = req.query;
     let query = {};
+    if (employeeId) {
+      query.userId = employeeId;
+    }
 
-    if (req.query.date) {
-      const d = new Date(req.query.date);
+    if (date) {
+      const d = new Date(date);
       query.date = { $gte: getStartOfDay(d), $lte: getEndOfDay(d) };
+    }
+    if (status) {
+      query.status = status;
     }
 
     const attendance = await Attendance.find(query)
-      .populate('userId', 'name email employeeId department')
+      .populate('userId', 'name email department')
       .sort({ date: -1 });
 
     res.status(200).json(attendance);
   } catch (error) {
-    res.status(500).json({ message: 'Server error fetching all records' });
+    res.status(500).json({ message: 'Error fetching records', error: error.message });
   }
 };
+
 
 exports.getSingleEmployeeAttendance = async (req, res) => {
   try {
@@ -198,32 +221,59 @@ exports.getTodayPresence = async (req, res) => {
     res.status(500).json({ message: 'Server error fetching today presence' });
   }
 };
-
 exports.getTeamSummary = async (req, res) => {
   try {
-    const todayStart = getStartOfDay();
-    const todayEnd = getEndOfDay();
+    const todayStart = getStartOfDay(new Date());
+    const todayEnd = getEndOfDay(new Date());
 
-    // Today's Stats
+    // 1. Basic Counts
+    const totalEmployees = await User.countDocuments({ role: 'employee' });
     const todayRecords = await Attendance.find({
       date: { $gte: todayStart, $lte: todayEnd }
-    });
+    }).populate('userId', 'name department');
 
-    const totalEmployees = await User.countDocuments({ role: 'employee' });
-    const presentCount = todayRecords.length;
-    const lateCount = todayRecords.filter(r => r.status === 'late').length;
+    // 2. Department-wise Stats (Pie Chart Data)
+    const deptStatsMap = {};
+    todayRecords.forEach(rec => {
+      const dept = rec.userId?.department || 'Other';
+      deptStatsMap[dept] = (deptStatsMap[dept] || 0) + 1;
+    });
+    const departmentStats = Object.keys(deptStatsMap).map(dept => ({
+      department: dept,
+      count: deptStatsMap[dept]
+    }));
+
+    // 3. Absent Employees List
+    const allEmployees = await User.find({ role: 'employee' }, 'name department email');
+    const presentIds = todayRecords.map(r => r.userId?._id.toString());
+    const absentEmployees = allEmployees.filter(emp => !presentIds.includes(emp._id.toString()));
+
+    // 4. Weekly Trend (for Bar Chart)
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    const weeklyTrend = await Attendance.aggregate([
+      { $match: { date: { $gte: getStartOfDay(sevenDaysAgo) } } },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+          present: { $sum: 1 }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]);
 
     res.status(200).json({
       totalEmployees,
-      presentToday: presentCount,
-      absentToday: totalEmployees - presentCount,
-      lateToday: lateCount
+      presentToday: todayRecords.length,
+      absentToday: absentEmployees.length,
+      departmentStats,
+      absentEmployees,
+      weeklyTrend
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error fetching team summary' });
+    res.status(500).json({ message: 'Error fetching dashboard data' });
   }
 };
-
 
 exports.exportAttendance = async (req, res) => {
   try {
