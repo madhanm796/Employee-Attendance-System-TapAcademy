@@ -10,7 +10,7 @@ A production-ready full-stack **MERN** application built for real-time attendanc
 - **College:** Veltech Ranga Sanku Arts College
 - **Contact Number:** +91 9384727902
 - **Email:** madhan796.m@gmail.com / 6277@velsrscollege.com  
-- **Video Presentation:** [Link to your Demo Video]
+- **Video Presentation:** (https://drive.google.com/file/d/1mnHjz5JOrR_9QzFOi8cERu3ME5OeO9_i/view?usp=sharing)
 
 ---
 
@@ -120,6 +120,8 @@ npm run dev
 │   ├── routes/            # Express Endpoints  
 │   └── utils/             # Date processing & CSV generation   `
 
+Refer env.example in /emp-attendance-frontend/ for Environment variables
+
 🧪 Credentials for Testing
 --------------------------
 
@@ -149,3 +151,18 @@ npm run dev
 *   **Clean Code:** Modular component architecture for scalability and readability.
     
 *   **UX Focused:** Responsive layouts with loading skeletons and color-coded status badges.
+
+
+## Screenshots
+
+![Sign In Page](screenshots/sign-in.png)
+![Register Page](screenshots/create-account.png)
+![Employee Dashboard](screenshots/emp-dashboard.png)
+![Employee Profile](screenshots/emp-profile.png)
+![Employee Summary/History](screenshots/emp-summary.png)
+![Manager Dashboard](screenshots/man-dashboard.png)
+![Manager All Records](screenshots/man-all-records.png)
+![Manager Team Calendar](screenshots/man-team-calendar.png)
+![Manager Today-Absent](screenshots/man-today-absent.png)
+![Manager Today-Present](screenshots/man-today-present.png)
+![Manager Individual-Record-Modal](screenshots/man-individual-record-modal.png)
