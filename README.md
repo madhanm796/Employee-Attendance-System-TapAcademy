@@ -1,4 +1,83 @@
- # 🕒 Employee Attendance Management System  A production-ready full-stack MERN application built for real-time attendance tracking, featuring automated status detection, managerial analytics, and visual reporting.  ---  ## 👤 Developer Information  * **Name:** [Your Full Name]  * **College:** [Your College Name]  * **Contact Number:** [Your Phone Number]  * **Email:** [Your Email Address]  * **Video Presentation:** [Link to your Demo Video]  ---  ## 🚀 Key Features  ### **Managerial Perspective (Admin Control)**  * **Insights Dashboard:** Real-time analytics including Weekly Attendance Trends (Bar Chart) and Department Distribution (Pie Chart).  * **Live Presence Tracking:** Instant view of "Present" vs "Absent" employees for the current day.  * **Team Calendar:** A visual monthly grid showing attendance density to spot patterns.  * **Advanced Records Management:** Search and filter logs by **Employee ID (e.g., EMP001)**, Name, Date, or Status.  * **Backend CSV Export:** Generate and download filtered reports directly from the server for data integrity.  * **Employee Drill-down:** Detailed historical logs accessible via modals directly from the records table.  ### **Employee Perspective**  * **Real-time Clocking:** Check-in and Check-out functionality with automatic "Late" detection (10:00 AM threshold).  * **Today's Status Widget:** Instant feedback on current clock-in time and personal status.  * **Personal History:** A searchable table of the user's specific attendance records.  * **Official Profile:** Read-only professional profile showing Department, Role, and Employee ID.  ---  ## 🛠 Tech Stack  | Layer | Technology |  | :--- | :--- |  | **Frontend** | React.js (Vite), Tailwind CSS, Lucide Icons |  | **State Management** | Zustand |  | **Charts/Visuals** | Recharts |  | **Backend** | Node.js, Express.js |  | **Database** | MongoDB with Mongoose (ODM) |  | **Authentication** | JSON Web Tokens (JWT) & BcryptJS |  [Image of MERN stack architecture diagram]  ---  ## ⚙️ Setup & Installation Guide  Follow these steps to deploy the project on a new machine for testing.  ### **Prerequisites**  * **Node.js:** v16.x or higher  * **npm:** v8.x or higher  * **MongoDB:** A running local instance or a MongoDB Atlas URI  ### **1. Repository Setup**  ```bash  git clone [Your-GitHub-Repository-URL]  cd [Your-Repository-Name]   `
+# 🕒 Employee Attendance Management System
+
+A production-ready full-stack **MERN** application built for real-time attendance tracking, featuring automated status detection, managerial analytics, and visual reporting.
+
+---
+
+## 👤 Developer Information
+
+- **Name:** [Your Full Name]  
+- **College:** [Your College Name]  
+- **Contact Number:** [Your Phone Number]  
+- **Email:** [Your Email Address]  
+- **Video Presentation:** [Link to your Demo Video]
+
+---
+
+## 🚀 Key Features
+
+### 👨‍💼 Managerial Perspective (Admin Control)
+
+- **Insights Dashboard**
+  - Weekly Attendance Trends (Bar Chart)
+  - Department Distribution (Pie Chart)
+
+- **Live Presence Tracking**
+  - Real-time view of **Present vs Absent** employees
+
+- **Team Calendar**
+  - Monthly attendance grid for pattern recognition
+
+- **Advanced Records Management**
+  - Filter by:
+    - Employee ID (`EMP001`)
+    - Name
+    - Date
+    - Status
+
+- **Backend CSV Export**
+  - Securely generate and download filtered reports
+
+- **Employee Drill-down**
+  - Detailed historical attendance logs via modal view
+
+---
+
+### 👨‍💻 Employee Perspective
+
+- **Real-time Clocking**
+  - Check-in / Check-out
+  - Automatic **Late detection** (after 10:00 AM)
+
+- **Today's Status Widget**
+  - Instant display of attendance state
+
+- **Personal Attendance History**
+  - Searchable personal records table
+
+- **Official Profile**
+  - Department
+  - Role
+  - Employee ID
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | React.js (Vite), Tailwind CSS, Lucide Icons |
+| **State Management** | Zustand |
+| **Charts / Visualization** | Recharts |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB with Mongoose (ODM) |
+| **Authentication** | JWT & BcryptJS |
+
+---
+
+## 🏗 MERN Architecture Overview
+
+ `
 
 ### **2\. Backend Configuration**
 
