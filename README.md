@@ -6,10 +6,10 @@ A production-ready full-stack **MERN** application built for real-time attendanc
 
 ## 👤 Developer Information
 
-- **Name:** [Your Full Name]  
-- **College:** [Your College Name]  
-- **Contact Number:** [Your Phone Number]  
-- **Email:** [Your Email Address]  
+- **Name:** Madhan M  
+- **College:** Veltech Ranga Sanku Arts College
+- **Contact Number:** +91 9384727902
+- **Email:** madhan796.m@gmail.com / 6277@velsrscollege.com  
 - **Video Presentation:** [Link to your Demo Video]
 
 ---
@@ -74,10 +74,6 @@ A production-ready full-stack **MERN** application built for real-time attendanc
 | **Authentication** | JWT & BcryptJS |
 
 ---
-
-## 🏗 MERN Architecture Overview
-
- `
 
 ### 2. Backend Configuration
 
