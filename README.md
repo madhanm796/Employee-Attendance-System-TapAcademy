@@ -160,6 +160,7 @@ Refer env.example in /emp-attendance-frontend/ for Environment variables
 ![Employee Dashboard](screenshots/emp-dashboard.png)
 ![Employee Profile](screenshots/emp-profile.png)
 ![Employee Summary/History](screenshots/emp-summary.png)
+![Employee Summary/History](screenshots/emp-summary-table.png)
 ![Manager Dashboard](screenshots/man-dashboard.png)
 ![Manager All Records](screenshots/man-all-records.png)
 ![Manager Team Calendar](screenshots/man-team-calendar.png)
