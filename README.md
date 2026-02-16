@@ -79,16 +79,13 @@ A production-ready full-stack **MERN** application built for real-time attendanc
 
  `
 
-### **2\. Backend Configuration**
+### 2. Backend Configuration
 
-1.  Bashcd server
-    
-2.  Bashnpm install
-    
-3.  Code snippetPORT=5000MONGO\_URI=your\_mongodb\_connection\_stringJWT\_SECRET=your\_jwt\_secret\_key\_here
-    
-4.  Bashnpm start
-    
+**Navigate to the server directory:**
+```bash
+cd emp-attendance-backend
+npm install
+```
 
 ### **3\. Frontend Configuration**
 
