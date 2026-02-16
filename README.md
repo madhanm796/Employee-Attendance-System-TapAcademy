@@ -85,18 +85,16 @@ A production-ready full-stack **MERN** application built for real-time attendanc
 ```bash
 cd emp-attendance-backend
 npm install
+npm run dev
 ```
 
 ### **3\. Frontend Configuration**
 
-1.  Bashcd client
-    
-2.  Bashnpm install
-    
-3.  Code snippetVITE\_API\_BASE\_URL=http://localhost:5000/api
-    
-4.  Bashnpm run dev
-    
+```
+cd client    
+npm install
+npm run dev
+``` 
 
 📁 Project Structure
 --------------------
