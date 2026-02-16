@@ -1,68 +1,85 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const User = require('../src/models/User');
-const Attendance = require('../src/models/Attendance');
-
-dotenv.config();
+const bcrypt = require('bcryptjs');
+const User = require('./models/User');
+const Attendance = require('./models/Attendance');
+require('dotenv').config();
 
 const seedData = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    
+    console.log("Connected to MongoDB for seeding...");
+
+    // Clear existing data to avoid duplicates
     await User.deleteMany({});
     await Attendance.deleteMany({});
 
-    const manager = await User.create({
-      name: 'Admin Manager',
-      email: 'manager@test.com',
-      password: 'password123', 
-      role: 'manager',
-      employeeId: 'MGR001',
-      department: 'HR'
-    });
+    // Hash Passwords
+    const salt = await bcrypt.genSalt(10);
+    const hashedAdminPassword = await bcrypt.hash('admin123', salt);
+    const hashedUserPassword = await bcrypt.hash('user123', salt);
 
-    const emp1 = await User.create({
-      name: 'John Doe',
-      email: 'john@test.com',
-      password: 'password123',
-      role: 'employee',
-      employeeId: 'EMP001',
-      department: 'IT'
-    });
+    // 1. Create Users
+    const users = await User.insertMany([
+      {
+        name: "Admin Manager",
+        email: "admin@company.com",
+        password: hashedAdminPassword,
+        role: "manager",
+        employeeId: "MGR001",
+        department: "Operations"
+      },
+      {
+        name: "Jane Smith",
+        email: "user@company.com",
+        password: hashedUserPassword,
+        role: "employee",
+        employeeId: "EMP001",
+        department: "Engineering"
+      }
+    ]);
 
-    const emp2 = await User.create({
-      name: 'Jane Smith',
-      email: 'jane@test.com',
-      password: 'password123',
-      role: 'employee',
-      employeeId: 'EMP002',
-      department: 'Sales'
-    });
-    const users = [emp1, emp2];
-    const statuses = ['present', 'late', 'half-day'];
+    console.log("Users Seeded ✅");
 
-    for (let i = 0; i < 7; i++) {
-      let date = new Date();
+    // 2. Create Attendance Data for the last 5 days
+    const attendanceRecords = [];
+    const emp1 = users[1]._id;
+    const emp2 = users[2]._id;
+
+    for (let i = 0; i < 5; i++) {
+      const date = new Date();
       date.setDate(date.getDate() - i);
+      date.setHours(0, 0, 0, 0);
 
-      for (const user of users) {
-        if (date.getDay() === 0 || date.getDay() === 6) continue;
+      // Record for Employee 1
+      attendanceRecords.push({
+        userId: emp1,
+        date: date,
+        checkInTime: new Date(date.setHours(9, 30)),
+        checkOutTime: new Date(date.setHours(18, 0)),
+        status: i === 1 ? 'late' : 'present', // Make one day "late"
+        totalHours: 8.5
+      });
 
-        await Attendance.create({
-          userId: user._id,
+      // Record for Employee 2 (Absent yesterday)
+      if (i !== 1) {
+        attendanceRecords.push({
+          userId: emp2,
           date: date,
-          checkInTime: new Date(date.setHours(9, 0, 0)),
-          checkOutTime: new Date(date.setHours(17, 0, 0)),
-          status: statuses[Math.floor(Math.random() * statuses.length)],
-          totalHours: 8
+          checkInTime: new Date(date.setHours(9, 0)),
+          checkOutTime: new Date(date.setHours(17, 30)),
+          status: 'present',
+          totalHours: 8.5
         });
       }
     }
 
-    console.log('✅ Data Seeded Successfully!');
+    await Attendance.insertMany(attendanceRecords);
+    console.log("Attendance Data Seeded ✅");
+
+    console.log("Seeding Complete. Press Ctrl+C to exit.");
     process.exit();
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error("Error seeding data:", error);
     process.exit(1);
   }
 };

@@ -86,19 +86,43 @@ A production-ready full-stack **MERN** application built for real-time attendanc
 cd emp-attendance-backend
 npm install
 npm run dev
+
+Ctrl + C to stop the server
+
+# Creating seeds
+
+# make sure you're inside the emp-attendance-backend directory
+
+node scripts/seed.js
+
+# again run the server
+npm run dev
+
 ```
 
 ### **3\. Frontend Configuration**
 
 ```
-cd client    
+cd emp-attendance-frontend    
 npm install
 npm run dev
 ``` 
 
 📁 Project Structure
 --------------------
-  ├── client/                # React Frontend  │   ├── src/  │   │   ├── api/           # Axios service layers  │   │   ├── components/    # Reusable UI (Modals, Charts, Stats)  │   │   ├── pages/         # Feature-specific pages (Dashboard, Calendar)  │   │   └── store/         # Zustand Auth store  ├── server/                # Node.js Backend  │   ├── controllers/       # Business logic (Auth, Attendance)  │   ├── models/            # Mongoose Schemas (User, Attendance)  │   ├── routes/            # Express Endpoints  │   └── utils/             # Date processing & CSV generation   `
+├── emp-attendance-frontend/                # React Frontend  
+    │    
+    ├── src/  │   
+    │   ├── api/           # Axios service layers  │   
+    │   ├── components/    # Reusable UI (Modals, Charts, Stats) │   
+    │   ├── pages/         # Feature-specific pages (Dashboard, Calendar)  │   
+    │   └── store/         # Zustand Auth store  
+
+├── emp-attendance-backend/   # Node.js Backend  
+│   ├── controllers/       # Business logic (Auth, Attendance)  
+│   ├── models/            # Mongoose Schemas (User, Attendance)  
+│   ├── routes/            # Express Endpoints  
+│   └── utils/             # Date processing & CSV generation   `
 
 🧪 Credentials for Testing
 --------------------------
