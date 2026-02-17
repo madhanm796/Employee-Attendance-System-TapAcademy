@@ -60,18 +60,17 @@ const EmployeeDashboard = () => {
     }
   };
 
-  // 4. Handle Check Out
   const handleCheckOut = async () => {
     try {
       await attendanceApi.checkOut();
       alert("👋 Checked Out Successfully! See you tomorrow.");
-      refreshDashboard(); // Reload UI to show "Day Complete"
+      refreshDashboard(); 
     } catch (error) {
       alert("❌ Check-out failed: " + (error.response?.data?.message || error.message));
     }
   };
 
-  // 5. Determine Current Status for UI
+
   const isCheckedIn = !!todayRecord?.checkInTime;
   const isCheckedOut = !!todayRecord?.checkOutTime;
 

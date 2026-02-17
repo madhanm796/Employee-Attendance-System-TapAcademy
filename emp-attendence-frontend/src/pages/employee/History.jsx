@@ -43,7 +43,7 @@ const History = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
-  // --- FIX START: Helper to get YYYY-MM-DD in Local Time ---
+
   const getLocalDateKey = (date) => {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -51,7 +51,7 @@ const History = () => {
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
-  // --- FIX END ---
+
 
   const renderCalendarDays = () => {
     const days = [];
@@ -62,13 +62,10 @@ const History = () => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-      // 1. Create the date object for the specific calendar cell
       const cellDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
       
-      // 2. Generate the Key (YYYY-MM-DD) for this cell using LOCAL time
       const cellKey = getLocalDateKey(cellDate);
 
-      // 3. Find record by comparing LOCAL Keys (ignores UTC time shift)
       const record = records.find(r => getLocalDateKey(r.date) === cellKey);
 
       days.push(

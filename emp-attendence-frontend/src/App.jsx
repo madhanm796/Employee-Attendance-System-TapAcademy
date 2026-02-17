@@ -1,20 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/useAuthStore';
 
-// Layout & Protection
 import DashboardLayout from './components/layout/DashboardLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 
-// Auth Pages
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 
-// Employee Pages
 import EmployeeDashboard from './pages/employee/Dashboard';
 import MyHistory from './pages/employee/History';
 import Profile from './pages/employee/Profile';
 
-// Manager Pages
 import ManagerDashboard from './pages/manager/Dashboard';
 import AllRecords from './pages/manager/AllRecords';
 import Reports from './pages/manager/Reports';
@@ -58,7 +54,6 @@ const App = () => {
           </Route>
         </Route>
 
-        {/* Error Handling */}
         <Route path="/unauthorized" element={<div className="p-10 text-center">403 - Unauthorized Access</div>} />
         <Route path="*" element={<div className="p-10 text-center">404 - Page Not Found</div>} />
       </Routes>

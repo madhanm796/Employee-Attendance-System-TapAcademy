@@ -2,7 +2,7 @@ export const generateCSV = (data) => {
   const headers = ['Employee Name', 'Date', 'Status', 'Check In', 'Check Out', 'Total Hours'];
   
   const rows = data.map(record => [
-    `"${record.userId?.name || 'N/A'}"`, // Wrap in quotes
+    `"${record.userId?.name || 'N/A'}"`,
     `"${new Date(record.date).toLocaleDateString()}"`,
     `"${record.status}"`,
     `"${record.checkInTime ? new Date(record.checkInTime).toLocaleTimeString() : '-'}"`,

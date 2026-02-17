@@ -226,13 +226,12 @@ exports.getTeamSummary = async (req, res) => {
     const todayStart = getStartOfDay(new Date());
     const todayEnd = getEndOfDay(new Date());
 
-    // 1. Basic Counts
     const totalEmployees = await User.countDocuments({ role: 'employee' });
     const todayRecords = await Attendance.find({
       date: { $gte: todayStart, $lte: todayEnd }
     }).populate('userId', 'name department');
 
-    // 2. Department-wise Stats (Pie Chart Data)
+
     const deptStatsMap = {};
     todayRecords.forEach(rec => {
       const dept = rec.userId?.department || 'Other';
@@ -243,12 +242,10 @@ exports.getTeamSummary = async (req, res) => {
       count: deptStatsMap[dept]
     }));
 
-    // 3. Absent Employees List
     const allEmployees = await User.find({ role: 'employee' }, 'name department email');
     const presentIds = todayRecords.map(r => r.userId?._id.toString());
     const absentEmployees = allEmployees.filter(emp => !presentIds.includes(emp._id.toString()));
 
-    // 4. Weekly Trend (for Bar Chart)
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
     const weeklyTrend = await Attendance.aggregate([

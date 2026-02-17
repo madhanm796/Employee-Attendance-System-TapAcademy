@@ -15,7 +15,7 @@ const Register = () => {
         email: '',
         password: '',
         department: '',
-        role: 'employee' // Default role
+        role: 'employee' 
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -70,8 +70,7 @@ const Register = () => {
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-5">
-
-                        {/* Full Name */}
+             
                         <div className="space-y-1">
                             <label className="text-sm font-medium text-gray-700 ml-1">Full Name</label>
                             <div className="relative">
@@ -90,7 +89,6 @@ const Register = () => {
                             </div>
                         </div>
 
-                        {/* Email */}
                         <div className="space-y-1">
                             <label className="text-sm font-medium text-gray-700 ml-1">Work Email</label>
                             <div className="relative">
@@ -109,7 +107,6 @@ const Register = () => {
                             </div>
                         </div>
 
-                        {/* Department & Role Row */}
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1">
                                 <label className="text-sm font-medium text-gray-700 ml-1">Department</label>

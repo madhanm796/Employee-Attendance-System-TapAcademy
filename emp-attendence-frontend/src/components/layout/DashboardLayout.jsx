@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom'; // <--- 1. Import Outlet
+import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom'; 
 import { useAuthStore } from '../../store/useAuthStore';
 import { LayoutDashboard, History, LogOut, ClipboardCheck, BarChart3, Calendar, Users } from 'lucide-react';
 
-const DashboardLayout = () => { // <--- 2. Remove { children } prop
+const DashboardLayout = () => { 
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const currentLocation = useLocation();
@@ -28,7 +28,6 @@ const DashboardLayout = () => { // <--- 2. Remove { children } prop
 
   return (
     <div className="flex h-screen bg-slate-50">
-      {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-slate-200 flex flex-col transition-all duration-300">
         <div className="p-6">
           <h1 className="text-2xl font-bold text-indigo-600 tracking-tight flex items-center gap-2">
@@ -64,9 +63,7 @@ const DashboardLayout = () => { // <--- 2. Remove { children } prop
         </div>
       </aside>
 
-      {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto h-screen">
-        {/* Header */}
         <header className="bg-white border-b border-slate-200 sticky top-0 z-10 px-8 py-4 flex justify-between items-center shadow-sm">
           <div>
             <h2 className="text-xl font-bold text-slate-800">Overview</h2>
@@ -84,7 +81,6 @@ const DashboardLayout = () => { // <--- 2. Remove { children } prop
           </div>
         </header>
 
-        {/* 3. The Outlet Renders the Page Here */}
         <div className="p-8">
           <Outlet />
         </div>

@@ -22,17 +22,14 @@ const ManagerDashboard = () => {
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-slate-800">Manager Insights</h2>
 
-      {/* Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard icon={<Users/>} label="Total Team" value={data.totalEmployees} color="indigo" />
         <StatCard icon={<UserCheck/>} label="Present Today" value={data.presentToday} color="emerald" />
         <StatCard icon={<UserX/>} label="Absent" value={data.absentToday} color="rose" />
       </div>
 
-      {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* 1. Weekly Trend (Bar Chart) */}
         <div className="lg:col-span-2 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm h-96">
           <h3 className="font-bold text-slate-800 mb-4">Weekly Attendance Trend</h3>
           <ResponsiveContainer width="100%" height="100%">
@@ -45,7 +42,6 @@ const ManagerDashboard = () => {
           </ResponsiveContainer>
         </div>
 
-        {/* 2. Department-wise (Pie Chart) */}
         <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm h-96">
           <h3 className="font-bold text-slate-800 mb-4">Department Distribution</h3>
           <ResponsiveContainer width="100%" height="100%">
@@ -58,8 +54,6 @@ const ManagerDashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-
-        {/* 3. Absent List (New Widget) */}
         <div className="lg:col-span-3 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="p-6 border-b border-slate-100 flex justify-between items-center">
             <h3 className="font-bold text-slate-800 flex items-center gap-2">
@@ -88,7 +82,6 @@ const ManagerDashboard = () => {
   );
 };
 
-// Reusable Stat Card
 const StatCard = ({ icon, label, value, color }) => (
   <div className={`p-6 rounded-3xl border border-slate-100 bg-white shadow-sm flex items-center gap-5`}>
     <div className={`p-4 bg-${color}-50 text-${color}-600 rounded-2xl`}>{icon}</div>

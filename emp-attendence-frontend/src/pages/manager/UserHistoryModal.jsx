@@ -24,7 +24,7 @@ const UserHistoryModal = ({ user, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
       <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
         
-        {/* Header */}
+
         <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
           <div>
             <h3 className="text-xl font-bold text-slate-800">{user.name}</h3>
@@ -35,7 +35,6 @@ const UserHistoryModal = ({ user, onClose }) => {
           </button>
         </div>
 
-        {/* Content */}
         <div className="p-6 max-h-[60vh] overflow-y-auto">
           {loading ? (
             <div className="py-12 text-center text-slate-400 animate-pulse">Loading history...</div>
@@ -69,7 +68,6 @@ const UserHistoryModal = ({ user, onClose }) => {
           )}
         </div>
 
-        {/* Footer */}
         <div className="p-4 bg-slate-50 border-t border-slate-100 text-center">
           <p className="text-xs text-slate-400 italic">Showing all historical records for this employee.</p>
         </div>

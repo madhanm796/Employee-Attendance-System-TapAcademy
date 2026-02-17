@@ -61,7 +61,6 @@ const AllRecords = () => {
         </button>
       </div>
 
-      {/* Filter Bar */}
       <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="relative">
           <Calendar className="absolute left-3 top-3 text-slate-400" size={18} />
@@ -94,7 +93,6 @@ const AllRecords = () => {
         </div>
       </div>
 
-      {/* Attendance Table */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <table className="w-full text-left">
           <thead className="bg-slate-50 border-b border-slate-200">
